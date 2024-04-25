@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,6 +61,7 @@
 
     </style>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="{{ asset('build/assets/echo-C_LtNYQQ.js')}}"></script>
 </head>
 <body>
 
@@ -120,6 +122,7 @@
     </div>
 
 <script>
+
     function heros() {
         return {
             heros: [],
@@ -155,8 +158,6 @@
             }
         }
     }
-
-
 
     </script>
     <!-- Bootstrap JS -->
