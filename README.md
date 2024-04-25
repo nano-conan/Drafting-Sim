@@ -64,3 +64,13 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+NOTES (to my future self)
+
+- Setting up the websocket server was a pain
+- Most of the pain was caused by Laravel attempting to reach the domain (conan.cloud) but timing out
+- Setting up Nginx to redirect ws.conan.cloud to my internal ip and setting Reverb to listen on 0.0.0.0:8080 fixed some issues
+- Environment variables for Reverb had to be local (0.0.0.0) meanwhile variables for Vite needed to be external (conan.cloud/ws.conan.cloud)
+
