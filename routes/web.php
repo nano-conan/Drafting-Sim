@@ -34,9 +34,3 @@ Route::get('/api/heros', function () {
 
     return $response;
 });
-
-Route::get('/broadcast', function (){
-    broadcast(new HeroSelected());
-    return "Hero Selected event broadcasted";
-});
-
