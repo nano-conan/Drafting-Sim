@@ -13,8 +13,5 @@ window.Echo = new Echo({
     enabledTransports: ['ws', 'wss'],
 });
 
-window.Echo.channel("hero-selected").listen("HeroSelected", (event) => {
-    console.log(event);
-});
 
 

@@ -45,8 +45,8 @@
                         <p class="card-text py-2">
                             Welcome to the drafting simulator. Would you like to host a game or join?
                         </p>
-                        <a href="/draft" class="btn host-btn">Host</a>
-                        <a href="/draft" class="btn join-btn">Join</a>
+                        <a href="/blue" class="btn host-btn">Host</a>
+                        <a href="/red" class="btn join-btn">Join</a>
                     </div>
                 </div>
             </div>

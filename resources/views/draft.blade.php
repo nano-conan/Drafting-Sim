@@ -69,7 +69,7 @@
 
     <div id="app">
 
-        <div class="container" x-data="heros()" x-init="init()">
+        <div class="container" x-data="$store.state" x-init="$store.state.init()">
 
             <div class="row">
 
@@ -121,10 +121,11 @@
         </div>
     </div>
 
-<script>
 
-    function heros() {
-        return {
+<script>
+    var user = "{{$user}}";
+    document.addEventListener('alpine:init', () => {
+        Alpine.store('state', {
             heros: [],
             red: [],
             blue: [],
@@ -155,9 +156,62 @@
                 this.isBlueTurn = !this.isBlueTurn;
                 this.isRedTurn = !this.isRedTurn;
                 this.heros.splice(index, 1);
+                sendGameState();
+            },
+            getHeros() {
+                return this.heros;
             }
+
+        })
+    });
+
+
+    </script>
+
+    <!-- Laravel Echo -->
+    <script>
+        window.Echo.channel('hero-selected')
+            .listen('HeroSelected', (e) => {
+                //Get new Game State
+                getGameState();
+            });
+
+        //Get Game State
+        function getGameState(){
+            fetch('/api/game-state')
+                .then(response => response.json())
+                .then(data => {
+                    Alpine.store("state").red = data.red;
+                    Alpine.store("state").redBan = data.redBan;
+                    Alpine.store("state").blue = data.blue;
+                    Alpine.store("state").blueBan = data.blueBan;
+                    Alpine.store("state").heros = data.heros;
+                });
         }
-    }
+
+        //Send game state
+        function sendGameState(){
+            var gameState = {
+                red: Alpine.store("state").red,
+                redBan: Alpine.store("state").redBan,
+                blue: Alpine.store("state").blue,
+                blueBan: Alpine.store("state").blueBan,
+                heros: Alpine.store("state").heros,
+            };
+            var jsonData = JSON.stringify(gameState);
+
+            fetch('/api/game-state', {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: jsonData,
+            });
+
+            console.log(jsonData);
+
+        }
 
     </script>
     <!-- Bootstrap JS -->
